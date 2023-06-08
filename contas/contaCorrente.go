@@ -6,13 +6,13 @@ type ContaCorrente struct {
 	Titular       clientes.Titular
 	NumeroAgencia int
 	NumeroConta   int
-	Saldo         float64
+	saldo         float64
 }
 
 func (c *ContaCorrente) Sacar(valorDoSaque float64) string {
-	podeSacar := valorDoSaque > 0 && valorDoSaque <= c.Saldo
+	podeSacar := valorDoSaque > 0 && valorDoSaque <= c.saldo
 	if podeSacar {
-		c.Saldo -= valorDoSaque
+		c.saldo -= valorDoSaque
 		return "Saque realizado não foi realizado com sucesso"
 	} else {
 		return "saldo infuficiente"
@@ -21,19 +21,24 @@ func (c *ContaCorrente) Sacar(valorDoSaque float64) string {
 
 func (c *ContaCorrente) Depositar(valorDoDeposito float64) (string, float64) {
 	if valorDoDeposito > 0 {
-		c.Saldo += valorDoDeposito
-		return "Saque realizado realizado com sucesso", c.Saldo
+		c.saldo += valorDoDeposito
+		return "Saque realizado realizado com sucesso", c.saldo
 	} else {
-		return "saldo infuficiente", c.Saldo
+		return "saldo infuficiente", c.saldo
 	}
 }
 
 func (c *ContaCorrente) Transferir(ValorDaTransferencia float64, ContaDestino *ContaCorrente) bool {
-	if ValorDaTransferencia < c.Saldo && ValorDaTransferencia > 0 {
-		c.Saldo -= ValorDaTransferencia
+	if ValorDaTransferencia < c.saldo && ValorDaTransferencia > 0 {
+		c.saldo -= ValorDaTransferencia
 		ContaDestino.Depositar(ValorDaTransferencia)
 		return true
 	} else {
 		return false
 	}
+}
+
+func (c *ContaCorrente) ObterSaldo() float64 {
+	return c.saldo
+
 }
