@@ -1,27 +1,20 @@
 package main
 
 import (
-	"contas"
 	"fmt"
+
+	"github.com/lucasrquadros/golang/clientes"
+	"github.com/lucasrquadros/golang/contas"
 )
 
 func main() {
 
-	contaDaSilvia := contas.ContaCorrente{Titular: "Silvia", Saldo: 300}
-	contaDoGustavo := contas.ContaCorrente{Titular: "Gustavo", Saldo: 100}
-	status := contaDoGustavo.Transferir(200, &contaDaSilvia)
+	contaDoBruno := contas.ContaCorrente{Titular: clientes.Titular{
+		Nome:      "Bruno",
+		CPF:       "093.140.459-27",
+		Profissao: "Desenvolvedor"},
+		NumeroAgencia: 123, NumeroConta: 123456, Saldo: 100}
 
-	fmt.Println(status)
-
-	fmt.Println(contaDaSilvia)
-	fmt.Println(contaDoGustavo)
-
-	// contaDaSilvia := contaCorrente{}
-	// contaDaSilvia.titular = "Silvia"
-	// contaDaSilvia.saldo = 500
-
-	// fmt.Println(contaDaSilvia.saldo)
-	// status, valor := contaDaSilvia.Depositar(2000)
-	// fmt.Println(status, valor)
+	fmt.Println(contaDoBruno)
 
 }
